@@ -1,0 +1,64 @@
+import java.util.*;
+class Employee {
+    String name;
+    Employee(String name) {
+        this.name = name;
+    }
+    double calculateBonus() {
+        return 0;
+    }
+    double calculateBonus(double amount) {
+        return 0;
+    }
+}
+class TechnicalEmployee extends Employee {
+    double salary;
+    int rating;
+    TechnicalEmployee(String n, double s, int r) {
+        super(n);
+        salary = s;
+        rating = r;
+    }
+    double calculateBonus() {
+        return salary * rating * 2 / 100;
+    }
+    double calculateBonus(double s, int r) {
+        return s * r * 2 / 100;
+    }
+}
+class SalesEmployee extends Employee {
+    double sales;
+    SalesEmployee(String n, double s) {
+        super(n);
+        sales = s;
+    }
+    double calculateBonus() {
+        return sales * 3 / 100;
+    }
+    double calculateBonus(double amount) {
+        return amount * 3 / 100;
+    }
+}
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int type = sc.nextInt();
+        String name = sc.next();
+        Employee e;
+        double earnings;
+        if (type == 1) {
+            double salary = sc.nextDouble();
+            int rating = sc.nextInt();
+            e = new TechnicalEmployee(name, salary, rating);
+            earnings = salary;
+        } else {
+            double sales = sc.nextDouble();
+            e = new SalesEmployee(name, sales);
+            earnings = sales;
+        }
+        double bonus = e.calculateBonus();
+        System.out.println("Employee Name: " + name);
+        System.out.printf("Bonus: %.2f%n", bonus);
+        System.out.printf("Total Earnings: %.2f", earnings + bonus);
+    }
+}
