@@ -1,0 +1,52 @@
+import java.util.*;
+    abstract class Employee {
+        private int id;
+        private String name;
+        Employee(int id, String name) {
+            this.id = id;
+            this.name = name;
+        }
+        int getId() { return id; }
+        String getName() { return name; }
+        abstract double calculateSalary();
+    }
+    class FullTimeEmployee extends Employee {
+        double salary;
+        FullTimeEmployee(int id, String name, double salary) {
+            super(id, name);
+            this.salary = salary;
+        }
+        double calculateSalary() {
+            return salary;
+        }
+    }
+    class ContractEmployee extends Employee {
+        int days;
+        double rate;
+        ContractEmployee(int id, String name, int days, double rate) {
+            super(id, name);
+            this.days = days;
+            this.rate = rate;
+        }
+        double calculateSalary() {
+            return days * rate;
+        }
+    }
+    class Main {
+        public static void main(String[] args) {
+            Scanner sc = new Scanner(System.in);
+            int type = sc.nextInt();
+            int id = sc.nextInt();
+            String name = sc.next();
+
+            Employee e;
+            if (type == 1)
+                e = new FullTimeEmployee(id, name, sc.nextDouble());
+            else
+                e = new ContractEmployee(id, name, sc.nextInt(), sc.nextDouble());
+
+            System.out.println("Employee ID: " + e.getId());
+            System.out.println("Employee Name: " + e.getName());
+            System.out.printf("Salary: %.2f", e.calculateSalary());
+        }
+    }
